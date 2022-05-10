@@ -2,7 +2,8 @@
 
 <style type="text/css" media="screen">
 #container {
-    height: 400px;
+    height: 275px;
+    margin-left: 10 px;
 }
 
 .highcharts-figure,
@@ -47,18 +48,19 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+
 </style>
 
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        Digital Will Service - Wealth Allocation
     </p>
 </figure>
 
 <table id="jqGrid01">
 </table>
-<div id="jQGridDemoPager" style="height: 50px;">
+<div id="jQGridDemoPager" style="height: 25px;">
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.2/css/ui.jqgrid.min.css" />
@@ -136,8 +138,8 @@ Highcharts.chart('container', {
                         },
 				{ name: 'Percent', index: 'Percent', align: 'center', editable: true}
                     ],
-            height: '300',
-            width: '1000',
+            height: '200',
+            width: '1250',
             rowNum: 10,
             editable: true,
             loadonce: true,
