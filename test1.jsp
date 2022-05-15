@@ -158,7 +158,20 @@ var customers = [
                         { name: 'id', index: 'id', hidden: false, key: true },
                         { name: 'Beneficiary', index: 'Beneficiary', align: 'center', editable: true,
 				    formatter: 'select', editable: true, edittype: 'select', stype: 'select',
-                            editoptions: { value: "Son:Anil;Daughter:Neeta;Spouse:Meera;Mother:Sharada" }
+                            editoptions: { value: <%
+									String globalStr="\"";
+									String str="";
+								for(int k1=0;k1<BeneficiaryList.size()-1;k1++)
+								{ 
+								 str=BeneficiaryList.get(k1)+":"+BeneficiaryList.get(k1)+";";
+								 globalStr=globalStr.concat(str);
+								}
+								globalStr=globalStr.substring(0,globalStr.length()-1);
+								globalStr=globalStr.concat("\"");
+								out.print(globalStr);
+								
+								%>}
+							 
 				},
 				{ name: 'Relation', index: 'Relation', align: 'center', editable: true,
 				    formatter: 'select', editable: true, edittype: 'select', stype: 'select',
@@ -198,8 +211,8 @@ var customers = [
             edit: true,
             addtext: 'Add',
             edittext: 'Edit',
-            caption: "Digital Will Service"
-	
+            caption: "Digital Will Service",
+		
         });
  
         $("#jqGrid01").jqGrid('navGrid', '#jQGridDemoPager',
