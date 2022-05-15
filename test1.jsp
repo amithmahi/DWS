@@ -175,11 +175,35 @@ var customers = [
 				},
 				{ name: 'Relation', index: 'Relation', align: 'center', editable: true,
 				    formatter: 'select', editable: true, edittype: 'select', stype: 'select',
-                            editoptions: { value: "Son:Son;Daughter:Daughter;Spouse:Spouse;Mother:Mother" }
+                            editoptions: { value:  <%
+									 globalStr="\"";
+									 str="";
+								for(int k1=0;k1<RelationList.size()-1;k1++)
+								{ 
+								 str=RelationList.get(k1)+":"+RelationList.get(k1)+";";
+								 globalStr=globalStr.concat(str);
+								}
+								globalStr=globalStr.substring(0,globalStr.length()-1);
+								globalStr=globalStr.concat("\"");
+								out.print(globalStr);
+								
+								%> }
 				},
                         { name: 'Asset', index: 'Asset', align: 'center', sortable: true, cellEdit: true,
                             formatter: 'select', editable: true, edittype: 'select', stype: 'select',
-                            editoptions: { value: "MutualFund:MutualFund;BankDeposit:BankDeposit;RealEstate:RealEstate;Stocks:Stocks" }
+                            editoptions: { value:  <%
+									 globalStr="\"";
+									 str="";
+								for(int k1=0;k1<AssetList.size()-1;k1++)
+								{ 
+								 str=AssetList.get(k1)+":"+AssetList.get(k1)+";";
+								 globalStr=globalStr.concat(str);
+								}
+								globalStr=globalStr.substring(0,globalStr.length()-1);
+								globalStr=globalStr.concat("\"");
+								out.print(globalStr);
+								
+								%> }
                         },
 				{ name: 'Percent', index: 'Percent', align: 'center', editable: true,sorttype:"float", formatter:"number", summaryType:'sum'}
                     ],
