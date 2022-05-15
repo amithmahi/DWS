@@ -76,46 +76,6 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-
-
-
-<script type="text/javascript">
-Highcharts.chart('container', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Digital Will Service\'s Asset Allocation'
-    },
-    subtitle: {
-        text: 'I here by Execute my will as follows'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Share',
-        data: [
-            ['Mutual Funds', 18],
-            ['Liquid Cash', 30],
-            ['Deposits', 15],
-            ['Stocks', 17],
-            ['Real Estate', 5],
-            ['401(K)', 5],
-            ['Gold', 5],
-            ['Silver', 5]
-        ]
-    }]
-});
-</script>
-
 <script type="text/javascript">
     $(function () {
      <%
@@ -141,6 +101,9 @@ Highcharts.chart('container', {
 		ArrayList PercentList = new ArrayList();
 		//ArrayList DiffCountList = new ArrayList();
 		
+		ArrayList assetList=new ArrayList();
+		ArrayList assetValueList=new ArrayList();
+		
 		int ctr=0;
 		while(myResultSet.next())
 		{
@@ -152,7 +115,20 @@ Highcharts.chart('container', {
 			//DiffCountList.add(myResultSet.getString(6));
 			
 		}
-		//Collections.sort(PMBuildNoList,Collections.reverseOrder());
+		
+		myQuery = "SELECT * FROM assets";
+		Class.forName(driver).newInstance();
+		myConnection = DriverManager.getConnection(url,username,password);
+		myPreparedStatement = myConnection.prepareStatement(myQuery);
+		myResultSet = myPreparedStatement.executeQuery();
+		while(myResultSet.next())
+		{
+			assetList.add(myResultSet.getString(1));
+			assetValueList.add(myResultSet.getString(2));
+		}
+
+		
+		
 	%>
 
 var customers = [
@@ -235,5 +211,38 @@ var customers = [
 	 
     });
 </script>
+
+<script type="text/javascript">
+Highcharts.chart('container', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Digital Will Service\'s Asset Allocation'
+    },
+    subtitle: {
+        text: 'I here by Execute my will as follows'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Share',
+        data: [
+           <%for(int j1=0;j1<assetList.size();j1++)
+							{ out.println("['"+assetList.get(j1).toString()+"', "+assetValueList.get(j1)+"],");}%>
+        ]
+    }]
+});
+</script>
+
+
 
 </HTML>
