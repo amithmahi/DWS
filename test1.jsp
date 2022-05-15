@@ -61,6 +61,8 @@
     <p class="highcharts-description">
     </p>
 </figure>
+<input type="BUTTON" id="bedata" value="Edit Selected" />
+
 <table id="jqGrid01">
 </table>
 <div id="jQGridDemoPager" style="height: 25px;">
@@ -175,7 +177,7 @@ var customers = [
 				},
 				{ name: 'Relation', index: 'Relation', align: 'center', editable: true,
 				    formatter: 'select', editable: true, edittype: 'select', stype: 'select',
-                            editoptions: { value:  <%
+                            editoptions: { value: <%
 									 globalStr="\"";
 									 str="";
 								for(int k1=0;k1<RelationList.size()-1;k1++)
@@ -187,11 +189,11 @@ var customers = [
 								globalStr=globalStr.concat("\"");
 								out.print(globalStr);
 								
-								%> }
+								%>}
 				},
                         { name: 'Asset', index: 'Asset', align: 'center', sortable: true, cellEdit: true,
                             formatter: 'select', editable: true, edittype: 'select', stype: 'select',
-                            editoptions: { value:  <%
+                            editoptions: { value: <%
 									 globalStr="\"";
 									 str="";
 								for(int k1=0;k1<AssetList.size()-1;k1++)
@@ -203,7 +205,7 @@ var customers = [
 								globalStr=globalStr.concat("\"");
 								out.print(globalStr);
 								
-								%> }
+								%>}
                         },
 				{ name: 'Percent', index: 'Percent', align: 'center', editable: true,sorttype:"float", formatter:"number", summaryType:'sum'}
                     ],
@@ -236,7 +238,8 @@ var customers = [
             addtext: 'Add',
             edittext: 'Edit',
             caption: "Digital Will Service",
-		
+		editurl: "someurl.jsp"
+			
         });
  
         $("#jqGrid01").jqGrid('navGrid', '#jQGridDemoPager',
@@ -278,6 +281,14 @@ Highcharts.chart('container', {
         ]
     }]
 });
+
+$("#bedata").click(function(){
+	var gr = jQuery("#jqGrid01").jqGrid('getGridParam','selrow');
+	alert(gr);
+	if( gr != null ) jQuery("#editgrid").jqGrid('editGridRow',gr,{height:280,reloadAfterSubmit:false});
+	else alert("Please Select Row");
+});
+
 </script>
 
 
